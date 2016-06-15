@@ -1,8 +1,11 @@
 <!doctype html>
 <html>
 	<head>
+
 		<title>Monarchies in Europe</title>
+
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+
 		<style>
 
 			body {
@@ -35,9 +38,9 @@
 			}
 
 		</style>
+
 	</head>
 	<body>
-		<h1>yolo</h1>
 
 		<div id="map"></div>
 
@@ -54,8 +57,7 @@
 				accessToken: 'pk.eyJ1Ijoiam9zaHVhZGVsYW5nZSIsImEiOiJ3RU1SemNzIn0.CyG3f36Z16ov1JEDHw2gDQ'
 			}).addTo(map);
 
-			// L.geoJSON.AJAX('countries.json').addTo(map);
-
+			// TO BE REMOVED WHEN WE FINALISE DATA
 			var countriesWeWant = ['Switzerland', 'Slovenia', 'Slovakia', 'Republic of Serbia', 'San Marino', 'Romania', 'Republic of Ireland', 'Portugal', 'Poland', 'Montenegro', 'Moldova', 'Malta', 'Macedonia', 'Lithuania', 'Latvia', 'Italy', 'Ireland', 'Iceland', 'Hungary', 'Greece', 'Germany', 'France', 'Finland', 'Estonia', 'Czech Republic', 'Cyprus', 'Croatia', 'Bulgaria', 'Bosnia and Herzegovina', 'Austria', 'Albania', 'United Kingdom', 'Sweden', 'Spain', 'Norway', 'Netherlands', 'Monaco', 'Luxembourg', 'Liechtenstein', 'Denmark', 'Belgium', 'Andorra', 'Vatican City', 'Kosovo'];
 			var monarchies = {
 				'United Kingdom': 'kingdom',
@@ -101,6 +103,7 @@
 				}
 			}
 			// console.log(JSON.stringify(newJSON));
+
 			L.geoJson(newJSON, {
 				style: function(feature){
 					var style = {
@@ -116,20 +119,6 @@
 		            return style;
 				},
 				onEachFeature: function(feature, layer) {
-
-					// var label = L.marker(layer.getBounds().getCenter(), {
-					// 	icon: L.divIcon({
-					// 		className: 'label',
-					// 		html: feature.properties.tooltip,
-					// 		iconSize: [100, 40]
-
-					// 	})
-					// }).addTo(map);
-
-					// var popup = L.popup()
-					// 	.setLatLng(layer.getBounds().getCenter())
-					// 	.setContent('<p>' + feature.properties.tooltip + '</p>')
-					// 	.openOn(map);
 
 					if(feature.properties.tooltip){
 
@@ -155,7 +144,6 @@
 					        }
 					    });
 					}
-
 
 				}
 			}).addTo(map);
