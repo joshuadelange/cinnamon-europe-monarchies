@@ -3379,7 +3379,7 @@ var countries = {
             "ISO_A3": "NOR",
             "ISO_N3": 578,
             "monarchy_type": "kingdom",
-            "tooltip": "King Harald V, house of Glücksburg. (reigning since 1991) "
+            "tooltip": "King Harald V, house of Glacksburg. (reigning since 1991) "
         },
         "geometry": {
             "type": "MultiPolygon",
@@ -6631,7 +6631,7 @@ var countries = {
             "ISO_A3": "MCO",
             "ISO_N3": 492,
             "monarchy_type": "principality",
-            "tooltip": "Prince Albert II, house of Grimaldi, (reigning since 2005), Constitutional monarch "
+            "tooltip": "Prince Albert II, house of Grimaldi, (reigning since 2005) "
         },
         "geometry": {
             "type": "Polygon",
@@ -6910,7 +6910,7 @@ var countries = {
             "ISO_A3": "LUX",
             "ISO_N3": 442,
             "monarchy_type": "grand duchy",
-            "tooltip": "Grand Duke Henri, house of Nassau-Weilburg, (reigning since 2000), Constitutional monarch"
+            "tooltip": "Grand Duke Henri, house of Nassau-Weilburg, (reigning since 2000)"
         },
         "geometry": {
             "type": "Polygon",
@@ -9799,7 +9799,7 @@ var countries = {
             "ISO_A3": "GRL",
             "ISO_N3": 304,
             "monarchy_type": "kingdom",
-            "tooltip": "Queen Margrethe II, house of Glücksburg, (reiging since 1972), Constitutional monarch "
+            "tooltip": "Queen Margrethe II, house of Glacksburg, (reiging since 1972) "
         },
         "geometry": {
             "type": "MultiPolygon",
@@ -14439,7 +14439,7 @@ var countries = {
             "ISO_A3": "FRO",
             "ISO_N3": 234,
             "monarchy_type": "kingdom",
-            "tooltip": "Queen Margrethe II, house of Glücksburg, (reiging since 1972), Constitutional monarch "
+            "tooltip": "Queen Margrethe II, house of Glacksburg, (reiging since 1972) "
         },
         "geometry": {
             "type": "MultiPolygon",
@@ -17140,7 +17140,7 @@ var countries = {
             "ISO_A3": "DNK",
             "ISO_N3": 208,
             "monarchy_type": "kingdom",
-            "tooltip": "Queen Margrethe II, house of Glücksburg, (reiging since 1972), Constitutional monarch "
+            "tooltip": "Queen Margrethe II, house of Glacksburg, (reiging since 1972) "
         },
         "geometry": {
             "type": "MultiPolygon",
@@ -19410,7 +19410,7 @@ var countries = {
             "ISO_A3": "BEL",
             "ISO_N3": 56,
             "monarchy_type": "kingdom",
-            "tooltip": "King Phiippe, house of Saxe-Coburg and Gotha, (reigning since 2013), Constitutional monarch"
+            "tooltip": "King Phiippe, house of Saxe-Coburg and Gotha, (reigning since 2013)"
         },
         "geometry": {
             "type": "Polygon",
@@ -20100,7 +20100,7 @@ var countries = {
             "ISO_A3": "AND",
             "ISO_N3": 20,
             "monarchy_type": "co-principality",
-            "tooltip": "Joan Enric Vives i Sicília (reigning since 2003), as Bishop of Urgell and François Hollande as president of France (reigning since 2012), co-principality"
+            "tooltip": "Joan Enric Vives i Sicalia (reigning since 2003), as Bishop of Urgell and Francois Hollande as president of France (reigning since 2012)"
         },
         "geometry": {
             "type": "Polygon",
