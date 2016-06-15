@@ -21,6 +21,7 @@
 			}
 
 			.popup {
+				width: 250px;
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -29,12 +30,12 @@
 			}
 
 			.popup img {
-				width: 250px;
+				width: 100%;
 			}
 
 			.popup p {
-				font-weight: bold;
-				padding: 15px;
+				font-weight: 500;
+				padding: 0 15px;
 			}
 
 		</style>
@@ -57,54 +58,7 @@
 				accessToken: 'pk.eyJ1Ijoiam9zaHVhZGVsYW5nZSIsImEiOiJ3RU1SemNzIn0.CyG3f36Z16ov1JEDHw2gDQ'
 			}).addTo(map);
 
-			// TO BE REMOVED WHEN WE FINALISE DATA
-			var countriesWeWant = ['Switzerland', 'Slovenia', 'Slovakia', 'Republic of Serbia', 'San Marino', 'Romania', 'Republic of Ireland', 'Portugal', 'Poland', 'Montenegro', 'Moldova', 'Malta', 'Macedonia', 'Lithuania', 'Latvia', 'Italy', 'Ireland', 'Iceland', 'Hungary', 'Greece', 'Germany', 'France', 'Finland', 'Estonia', 'Czech Republic', 'Cyprus', 'Croatia', 'Bulgaria', 'Bosnia and Herzegovina', 'Austria', 'Albania', 'United Kingdom', 'Sweden', 'Spain', 'Norway', 'Netherlands', 'Monaco', 'Luxembourg', 'Liechtenstein', 'Denmark', 'Belgium', 'Andorra', 'Vatican City', 'Kosovo'];
-			var monarchies = {
-				'United Kingdom': 'kingdom',
-				'Sweden': 'kingdom',
-				'Spain': 'kingdom',
-				'Norway': 'kingdom',
-				'Netherlands': 'kingdom',
-				'Monaco': 'principality',
-				'Luxembourg': 'grand duchy',
-				'Liechtenstein': 'principality',
-				'Denmark': 'kingdom',
-				'Belgium': 'kingdom',
-				'Andorra': 'co-principality',
-				'Vatican City': 'papacy',
-			};
-			var tooltips = {
-				'United Kingdom': 'yolo',
-				'Sweden': 'yolo',
-				'Spain': 'yolo',
-				'Norway': 'yolo',
-				'Netherlands': 'yolo',
-				'Monaco': 'principality',
-				'Luxembourg': 'grand duchy',
-				'Liechtenstein': 'principality',
-				'Denmark': 'yolo',
-				'Belgium': 'yolo',
-				'Andorra': 'co-principality',
-				'Vatican City': 'papacy',
-			};
-			var newJSON = {
-				"type": "FeatureCollection",
-				"features": []
-			};
-			console.log('hello', countries);
-			for (var i = countries.features.length - 1; i >= 0; i--) {
-				var newCountry = countries.features[i];
-				console.log('checking ', newCountry.properties.SOVEREIGNT);
-				if(countriesWeWant.indexOf(newCountry.properties.SOVEREIGNT) > -1){
-					console.log('add ', newCountry.properties.SOVEREIGNT);
-					newCountry.properties.monarchy_type = monarchies[newCountry.properties.SOVEREIGNT];
-					newCountry.properties.tooltip = tooltips[newCountry.properties.SOVEREIGNT];
-					newJSON.features.push(newCountry);
-				}
-			}
-			// console.log(JSON.stringify(newJSON));
-
-			L.geoJson(newJSON, {
+			L.geoJson(countries, {
 				style: function(feature){
 					var style = {
 		                weight: 1,
@@ -140,9 +94,32 @@
 					        },
 					        mouseout: function(){
 					        	document.body.removeChild(popup);
-					        	// popup.closePopup()
 					        }
 					    });
+
+						if(feature.properties.SOVEREIGNT === 'Liechtenstein'
+						|| feature.properties.SOVEREIGNT === 'Andorra'
+						|| feature.properties.SOVEREIGNT === 'Vatican'){
+							var circle = L.marker(layer.getBounds().getCenter(), {
+								icon: L.icon({
+									iconUrl: 'circle.png',
+									iconSize: [40, 40],
+									opacity: 0.3
+								})
+							}).addTo(map);
+
+						    circle.on({
+						        mouseover: function(e){
+									document.body.appendChild(popup);
+									popup.style.left = (parseInt(e.originalEvent.pageX) - 125) + 'px';
+									popup.style.top = (parseInt(e.originalEvent.pageY) + 20) + 'px';					        	
+						        },
+						        mouseout: function(){
+						        	document.body.removeChild(popup);
+						        }
+						    });
+
+						}
 					}
 
 				}
