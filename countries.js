@@ -20100,7 +20100,7 @@ var countries = {
             "ISO_A3": "AND",
             "ISO_N3": 20,
             "monarchy_type": "co-principality",
-            "tooltip": "Joan Enric Vives i Sicalia as Bishop of Urgell and Francois Hollande as president of France (reigning since 2012)"
+            "tooltip": "Joan Enric Vives i Sicalia as Bishop of Urgell (reigning since 2003) and Francois Hollande as president of France (reigning since 2012)"
         },
         "geometry": {
             "type": "Polygon",
