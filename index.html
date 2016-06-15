@@ -4,6 +4,11 @@
 		<title>Monarchies in Europe</title>
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 		<style>
+
+			body {
+				font-family: 'Helvetica Neue', sans-serif;
+			}
+
 			#map {
 				position: absolute;
 					top: 0;
@@ -11,17 +16,24 @@
 					right: 0;
 					bottom: 0;
 			}
+
 			.popup {
 				position: absolute;
 				top: 0;
 				left: 0;
 				z-index: 10000000;
 				background-color: white;
-				padding: 15px;
-				border-radius: 10px;
-				font-weight: bold;
-				font-family: 'Helvetica Neue', sans-serif;
 			}
+
+			.popup img {
+				width: 250px;
+			}
+
+			.popup p {
+				font-weight: bold;
+				padding: 15px;
+			}
+
 		</style>
 	</head>
 	<body>
@@ -104,6 +116,7 @@
 		            return style;
 				},
 				onEachFeature: function(feature, layer) {
+
 					// var label = L.marker(layer.getBounds().getCenter(), {
 					// 	icon: L.divIcon({
 					// 		className: 'label',
@@ -118,21 +131,23 @@
 					// 	.setContent('<p>' + feature.properties.tooltip + '</p>')
 					// 	.openOn(map);
 
-
 					if(feature.properties.tooltip){
 
-						var popup = document.createElement('div');
-						popup.innerHTML = feature.properties.tooltip;
+						var popup = document.createElement('div'),
+							html = '<img src="headshots/' + feature.properties.SOVEREIGNT.toLowerCase().replace(' ', '-') + '.jpg">';
+
+						html = html + '<p>' + feature.properties.tooltip + '</p>';
+						popup.innerHTML = html;
+
 						popup.classList.add('popup');
 
 					    layer.on({
 					        mouseover: function(e){
-								console.log('adding');
 								document.body.appendChild(popup);
 					        },
 					        mousemove: function(e){
-								popup.style.left = e.originalEvent.pageX + 'px';
-								popup.style.top = e.originalEvent.pageY + 'px';					        	
+								popup.style.left = (parseInt(e.originalEvent.pageX) - 125) + 'px';
+								popup.style.top = (parseInt(e.originalEvent.pageY) + 20) + 'px';					        	
 					        },
 					        mouseout: function(){
 					        	document.body.removeChild(popup);
