@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Monarchies in Europe</title>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+		<style>
+			#map {
+				position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+			}
+			.popup {
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 10000000;
+				background-color: white;
+				padding: 15px;
+				border-radius: 10px;
+				font-weight: bold;
+				font-family: 'Helvetica Neue', sans-serif;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>yolo</h1>
+
+		<div id="map"></div>
+
+ 		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+ 		<script src="countries.js"></script>
+
+		<script>
+
+			var map = L.map('map').setView([54.5260, 15.2551], 4);
+
+			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+				attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+				id: 'joshuadelange.j5igjfc7',
+				accessToken: 'pk.eyJ1Ijoiam9zaHVhZGVsYW5nZSIsImEiOiJ3RU1SemNzIn0.CyG3f36Z16ov1JEDHw2gDQ'
+			}).addTo(map);
+
+			// L.geoJSON.AJAX('countries.json').addTo(map);
+
+			var countriesWeWant = ['Switzerland', 'Slovenia', 'Slovakia', 'Republic of Serbia', 'San Marino', 'Romania', 'Republic of Ireland', 'Portugal', 'Poland', 'Montenegro', 'Moldova', 'Malta', 'Macedonia', 'Lithuania', 'Latvia', 'Italy', 'Ireland', 'Iceland', 'Hungary', 'Greece', 'Germany', 'France', 'Finland', 'Estonia', 'Czech Republic', 'Cyprus', 'Croatia', 'Bulgaria', 'Bosnia and Herzegovina', 'Austria', 'Albania', 'United Kingdom', 'Sweden', 'Spain', 'Norway', 'Netherlands', 'Monaco', 'Luxembourg', 'Liechtenstein', 'Denmark', 'Belgium', 'Andorra', 'Vatican City', 'Kosovo'];
+			var monarchies = {
+				'United Kingdom': 'kingdom',
+				'Sweden': 'kingdom',
+				'Spain': 'kingdom',
+				'Norway': 'kingdom',
+				'Netherlands': 'kingdom',
+				'Monaco': 'principality',
+				'Luxembourg': 'grand duchy',
+				'Liechtenstein': 'principality',
+				'Denmark': 'kingdom',
+				'Belgium': 'kingdom',
+				'Andorra': 'co-principality',
+				'Vatican City': 'papacy',
+			};
+			var tooltips = {
+				'United Kingdom': 'yolo',
+				'Sweden': 'yolo',
+				'Spain': 'yolo',
+				'Norway': 'yolo',
+				'Netherlands': 'yolo',
+				'Monaco': 'principality',
+				'Luxembourg': 'grand duchy',
+				'Liechtenstein': 'principality',
+				'Denmark': 'yolo',
+				'Belgium': 'yolo',
+				'Andorra': 'co-principality',
+				'Vatican City': 'papacy',
+			};
+			var newJSON = {
+				"type": "FeatureCollection",
+				"features": []
+			};
+			console.log('hello', countries);
+			for (var i = countries.features.length - 1; i >= 0; i--) {
+				var newCountry = countries.features[i];
+				console.log('checking ', newCountry.properties.SOVEREIGNT);
+				if(countriesWeWant.indexOf(newCountry.properties.SOVEREIGNT) > -1){
+					console.log('add ', newCountry.properties.SOVEREIGNT);
+					newCountry.properties.monarchy_type = monarchies[newCountry.properties.SOVEREIGNT];
+					newCountry.properties.tooltip = tooltips[newCountry.properties.SOVEREIGNT];
+					newJSON.features.push(newCountry);
+				}
+			}
+			// console.log(JSON.stringify(newJSON));
+			L.geoJson(newJSON, {
+				style: function(feature){
+					var style = {
+		                weight: 1,
+		                opacity: 1,
+		                color: '#8A8A8A',
+		                fillOpacity: 0.3,
+		                fillColor: '#FFFFFF'
+		            };
+		            if(feature.properties.monarchy_type){
+		            	style.fillColor = '#6E06A0';
+		            }
+		            return style;
+				},
+				onEachFeature: function(feature, layer) {
+					// var label = L.marker(layer.getBounds().getCenter(), {
+					// 	icon: L.divIcon({
+					// 		className: 'label',
+					// 		html: feature.properties.tooltip,
+					// 		iconSize: [100, 40]
+
+					// 	})
+					// }).addTo(map);
+
+					// var popup = L.popup()
+					// 	.setLatLng(layer.getBounds().getCenter())
+					// 	.setContent('<p>' + feature.properties.tooltip + '</p>')
+					// 	.openOn(map);
+
+
+					if(feature.properties.tooltip){
+
+						var popup = document.createElement('div');
+						popup.innerHTML = feature.properties.tooltip;
+						popup.classList.add('popup');
+
+					    layer.on({
+					        mouseover: function(e){
+								console.log('adding');
+								document.body.appendChild(popup);
+					        },
+					        mousemove: function(e){
+								popup.style.left = e.originalEvent.pageX + 'px';
+								popup.style.top = e.originalEvent.pageY + 'px';					        	
+					        },
+					        mouseout: function(){
+					        	document.body.removeChild(popup);
+					        	// popup.closePopup()
+					        }
+					    });
+					}
+
+
+				}
+			}).addTo(map);
+
+		</script>
+	</body>
+</html>
