@@ -7201,7 +7201,7 @@ var countries = {
             "ISO_A3": "LIE",
             "ISO_N3": 438,
             "monarchy_type": "principality",
-            "tooltip": "Prince Hans-Adam II, house of Liechtenstein, (reigning since 1989). Has power to veto government monarch"
+            "tooltip": "Prince Hans-Adam II, house of Liechtenstein, (reigning since 1989)"
         },
         "geometry": {
             "type": "Polygon",
